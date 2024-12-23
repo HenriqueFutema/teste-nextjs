@@ -1,7 +1,6 @@
 import NextAuth from "next-auth/next";
 import GithubProvider from "next-auth/providers/github";
 
-console.log(process.env)
 const handler = NextAuth({
   providers: [
     GithubProvider({
