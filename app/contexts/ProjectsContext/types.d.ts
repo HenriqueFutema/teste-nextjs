@@ -14,15 +14,31 @@ export interface IProjectsProviderProps {
 }
 
 export interface IProject {
-  id: number,
-  name: string,
-  description: string,
-  responsible: string,
-  initialDate: Date,
-  endDate: Date,
-  createdAt: Date,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  tasks: any[]
+  id: number;
+  name: string;
+  description: string;
+  responsible: string;
+  initialDate: Date;
+  endDate: Date;
+  createdAt: Date;
+  tasks: ITask[];
+  comments: IComment[];
+}
+
+interface ITask {
+  id: number;
+  title: string;
+  isDone: boolean;
+  projectId: number;
+  createdAt: Date;
+}
+
+interface IComment {
+  id: number;
+  author: string;
+  content: string;
+  projectId: number;
+  createdAt: Date;
 }
 
 interface ICounter {

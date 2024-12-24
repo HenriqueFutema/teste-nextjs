@@ -4,6 +4,7 @@ import { Card, CardHeader, CardContent, CardTitle, CardDescription, CardFooter }
 import { IProjectCardProps } from "./types"
 import { Button } from "@/components/ui/button"
 import { StatusProgress } from "../StatusProgress/StatusProgress"
+import { redirect } from "next/navigation"
 
 export function ProjectCard({
   project
@@ -49,7 +50,7 @@ export function ProjectCard({
         </div>
       </CardContent>
       <CardFooter className="flex justify-end">
-        <Button>
+        <Button onClick={() => redirect(`/projects/${project.id}`)}>
           Ver Detalhes
         </Button>
       </CardFooter>

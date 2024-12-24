@@ -36,6 +36,7 @@ model Task {
 
 model Comment {
   id Int @id @default(autoincrement())
+  author String
   content String
   project Project @relation(fields: [projectId], references: [id])
   projectId Int
