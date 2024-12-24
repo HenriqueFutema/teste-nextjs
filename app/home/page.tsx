@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 import { getProjects } from "../api/actions/projectActions";
 import { ProjectsProvider } from "../contexts/ProjectsContext/ProjectsContext";
 import { InformationProjectsStatus } from "../components/Home/InformationProjectsStatus/InformationProjectsStatus";
-import { IProject } from "../contexts/ProjectsContext/types";
 import { ProjectsChart } from "../components/Home/ProjectsChart/ProjectsChart";
 
 export default async function Home() {
@@ -15,37 +14,38 @@ export default async function Home() {
   const { user } = session
   const { projects } = await getProjects();
 
-  const counter = {
-    activeProjects: 0,
-    completedProjects: 0,
-    lateProjects: 0,
-  }
-  const now = new Date();
 
-  projects.forEach((project: IProject) => {
-    const initialDate = new Date(project.initialDate);
-    const endDate = new Date(project.endDate);
+  // const counter = {
+  //   activeProjects: 0,
+  //   completedProjects: 0,
+  //   lateProjects: 0,
+  // }
 
-    const hasIncompleteTasks = project.tasks.some((task) => !task.isDone);
-    const allTasksCompleted = project.tasks.length > 0 && project.tasks.every((task) => task.isDone);
+  // const now = new Date();
 
-    if (now >= initialDate && now <= endDate && hasIncompleteTasks) {
-      return counter.activeProjects = ++counter.activeProjects
-    }
+  // projects.forEach((project: IProject) => {
+  //   const initialDate = new Date(project.initialDate);
+  //   const endDate = new Date(project.endDate);
 
-    if (allTasksCompleted) {
-      return counter.completedProjects = ++counter.completedProjects
-    }
+  //   const hasIncompleteTasks = project.tasks.some((task) => !task.isDone);
+  //   const allTasksCompleted = project.tasks.length > 0 && project.tasks.every((task) => task.isDone);
 
-    return counter.lateProjects = ++counter.lateProjects
-  });
+  //   if (now >= initialDate && now <= endDate && hasIncompleteTasks) {
+  //     return counter.activeProjects = ++counter.activeProjects
+  //   }
+
+  //   if (allTasksCompleted) {
+  //     return counter.completedProjects = ++counter.completedProjects
+  //   }
+
+  //   return counter.lateProjects = ++counter.lateProjects
+  // });
 
   return (
     <div>
       <h3 className="font-bold text-2xl">Bem vindo, {user?.name}!</h3>
       <ProjectsProvider initialData={{
         projects,
-        counter
       }}>
         <InformationProjectsStatus />
         <ProjectsChart />

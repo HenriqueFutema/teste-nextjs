@@ -2,13 +2,14 @@
 export interface IProjectsContext {
   projects: IProject[];
   counter: ICounter;
+  setCounter: (counter) => void;
+  setProjects: (projects) => void;
 }
 
 export interface IProjectsProviderProps {
   children: ReactNode;
   initialData: {
     projects: IProject[];
-    counter: ICounter;
   }
 }
 

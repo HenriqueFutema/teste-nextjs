@@ -7,10 +7,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
 
   try {
     const tasks = await prisma.task.findMany({
-      where: { projectId: Number(projectId) },
-      include: {
-        comments: true
-      }
+      where: { projectId: Number(projectId) }
     })
     return NextResponse.json({ tasks })
   } catch (err) {
