@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 import api from "../../../services/axiosInstance"
 
@@ -12,10 +12,6 @@ export function TaskCard({
 }: ITaskCardProps) {
   const { id, title } = task
   const [isDone, setIsDone] = useState(task.isDone)
-
-  useEffect(() => {
-    console.log(isDone)
-  }, [isDone])
 
   async function handleCheckIsDone(value: boolean) {
     setIsDone(value)

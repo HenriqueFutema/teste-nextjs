@@ -4,19 +4,21 @@ import prisma from "@/lib/db";
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const {
-    content
+    content,
+    author
   } = await req.json()
   const { id: projectId } = await params
 
   try {
-    const task = await prisma.comment.create({
+    const comment = await prisma.comment.create({
       data: {
+        author,
         content,
         projectId: Number(projectId)
       }
     })
 
-    return NextResponse.json({ task })
+    return NextResponse.json({ comment })
   } catch (err) {
     return NextResponse.json(
       {
